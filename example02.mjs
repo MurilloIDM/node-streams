@@ -1,8 +1,17 @@
 import { createReadStream } from "fs";
 
-const readStream = createReadStream("./.docs/data.txt");
+let readStream = createReadStream("./.docs/data.txt");
 
-setTimeout(() => {
-  const data = readStream.read(10);
-  console.log(data);
-}, 3000);
+let chucks = [];
+
+readStream.on("readable", () => {
+  let chuck;
+
+  while (null !== (chuck = readStream.read())) {
+    chucks.push(chuck);
+  }
+});
+
+readStream.on("end", () => {
+  console.log(chucks);
+});
