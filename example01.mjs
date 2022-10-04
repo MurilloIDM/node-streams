@@ -1,4 +1,4 @@
-import { createReadStream, ReadStream } from "fs";
+import { createReadStream } from "fs";
 
 const readStream = createReadStream("./.docs/data.txt");
 
